@@ -45,10 +45,19 @@ app.get('/urls/:shortURL',(req, res) =>{
   res.render('urls_show', templateVars)
 });
 
-app.post('/urls', (req, res)=> {
-  console.log(req.body);
-  res.send('OK')
-})
+app.post("/urls/:shortURL/delete", (req, res) => {
+  delete urlDatabase[req.params.shortURL];
+  res.redirect('/urls');
+}); 
+
+
+app.post("/urls/:shortURL/modify", (req, res) => {
+  const url = req.params.shortURL;
+  const newUrl = req.body.URL;
+  urlDatabase[url] = newUrl;
+  res.redirect('/urls');
+  }); 
+  
 
 app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
