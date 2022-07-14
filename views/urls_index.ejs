@@ -21,6 +21,7 @@
 
   <body>
     <main style="margin: 1em;">
+      <% if (user) { %>
       <h3>My URLs</h3>
       <table class="table">
         <thead>
@@ -35,17 +36,20 @@
           <% for (let url in urls) { %>
             <tr>
               <td><a href="/u/<%= url %>"><%= url %></a></td>
-              <td><%= urls[url] %></td>
+              <td><%= urls[url].longURL %></td>
               <td><form method="GET" action="/urls/<%=url%>">
                 <button type='submit' class="btn btn-outline-primary"> Edit </button>
                 </form></td>
                 <td><form method="POST" action="/urls/<%=url %>/delete">
-                  <button type='submit' class="btn btn-outline-danger"> Delete</button>
+                  <button type='submit' class="btn btn-outline-danger">Delete</button>
                   </form></td>
             </tr>
           <% } %>
         </tbody>
       </table>
+      <% } else { %>
+        <h3> You should login to see URL</h3>
+        <% } %>
     </main>
     <!-- Bootstrap JS -->
     <script
